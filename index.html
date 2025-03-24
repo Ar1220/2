@@ -1,39 +1,71 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-  <meta name="viewport" content="width=device-width" , initial-scale=1.0">
-  <title> Welcome </title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Video Autoplay with Unmute</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="icon" href="favicon.png" type="icon/images" />
+  <style>
+    /* Unmute/Mute button styling */
+    .unmute-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .unmute-button:hover {
+      background-color: rgba(255, 255, 255, 0.8);
+      color: black;
+    }
+  </style>
 </head>
 
 <body>
-
   <div class="container">
-
-    <video autoplay loop plays-inline class="back-video" >
-      <source src="aaa.mp4" 
-        type="video/mp4">
+    <!-- Background video -->
+    <video class="back-video" autoplay muted loop id="backgroundVideo">
+      <source src="./aaa.mp4" type="video/mp4">
+      Your browser does not support the video tag.
     </video>
 
-    <nav>
+    <!-- Unmute/Mute button -->
+    <button class="unmute-button" id="unmuteButton">Unmute</button>
 
-      <ul>
-        <li><a href="#"> Welcome  </a></li>
-        <li><a href="#">  To</li>
-        <li><a href="https://ar1220.github.io/.1/">My Red Card </a></li>
-      </ul>
-    </nav>
-
+    <!-- Content -->
     <div class="content">
-      <h1> Welcome </h1>
-      <a href="https://ar1220.github.io/3/">This for Anime lover</a>
-    
+      <h1>Welcome</h1>
+      <a href="https://ar1220.github.io/2/">Game CGM</a>
     </div>
-
-
   </div>
+
+  <script>
+    // Get video and button elements
+    const video = document.getElementById("backgroundVideo");
+    const unmuteButton = document.getElementById("unmuteButton");
+
+    // Button functionality to toggle mute/unmute
+    unmuteButton.addEventListener("click", () => {
+      if (video.muted) {
+        video.muted = false; // Unmute the video
+        unmuteButton.textContent = "Mute"; // Change button text
+      } else {
+        video.muted = true; // Mute the video
+        unmuteButton.textContent = "Unmute"; // Change button text
+      }
+    });
+
+    // Ensure autoplay works properly even if muted (browser policy)
+    video.play();
+  </script>
 </body>
 
 </html>
